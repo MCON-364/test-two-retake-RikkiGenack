@@ -43,7 +43,7 @@ jobs:
         with:
           test-name: "IM - addStock increases stock"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#addStockIncreasesStockForItem"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#addStockIncreasesStockForItem"
           timeout: 10
           max-score: 1
 
@@ -53,7 +53,7 @@ jobs:
         with:
           test-name: "IM - addStock accumulates"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#addStockAccumulatesAcrossMultipleCalls"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#addStockAccumulatesAcrossMultipleCalls"
           timeout: 10
           max-score: 1
 
@@ -63,7 +63,7 @@ jobs:
         with:
           test-name: "IM - getStock returns zero for unknown"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#getStockReturnsZeroForUnknownItem"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#getStockReturnsZeroForUnknownItem"
           timeout: 10
           max-score: 1
 
@@ -73,7 +73,7 @@ jobs:
         with:
           test-name: "IM - addStock throws on zero qty"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#addStockThrowsOnZeroQty"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#addStockThrowsOnZeroQty"
           timeout: 10
           max-score: 1
 
@@ -83,7 +83,7 @@ jobs:
         with:
           test-name: "IM - addStock throws on negative qty"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#addStockThrowsOnNegativeQty"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#addStockThrowsOnNegativeQty"
           timeout: 10
           max-score: 1
 
@@ -93,7 +93,7 @@ jobs:
         with:
           test-name: "IM - removeStock true when sufficient"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#removeStockReturnsTrueWhenStockSufficient"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#removeStockReturnsTrueWhenStockSufficient"
           timeout: 10
           max-score: 1
 
@@ -103,7 +103,7 @@ jobs:
         with:
           test-name: "IM - removeStock false when insufficient"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#removeStockReturnsFalseWhenInsufficientStock"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#removeStockReturnsFalseWhenInsufficientStock"
           timeout: 10
           max-score: 1
 
@@ -113,7 +113,7 @@ jobs:
         with:
           test-name: "IM - removeStock does not go below zero"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#removeStockDoesNotGoBelowZero"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#removeStockDoesNotGoBelowZero"
           timeout: 10
           max-score: 1
 
@@ -123,7 +123,7 @@ jobs:
         with:
           test-name: "IM - removeStock throws on zero qty"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#removeStockThrowsOnZeroQty"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#removeStockThrowsOnZeroQty"
           timeout: 10
           max-score: 1
 
@@ -133,7 +133,7 @@ jobs:
         with:
           test-name: "IM - totalUnitsAdded reflects all additions"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#totalUnitsAddedReflectsAllAdditions"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#totalUnitsAddedReflectsAllAdditions"
           timeout: 10
           max-score: 1
 
@@ -143,7 +143,7 @@ jobs:
         with:
           test-name: "IM - totalUnitsAdded not affected by removals"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#totalUnitsAddedNotAffectedByRemovals"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#totalUnitsAddedNotAffectedByRemovals"
           timeout: 10
           max-score: 1
 
@@ -153,7 +153,7 @@ jobs:
         with:
           test-name: "IM - snapshot is unmodifiable"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#getSnapshotIsUnmodifiable"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#getSnapshotIsUnmodifiable"
           timeout: 10
           max-score: 1
 
@@ -163,7 +163,7 @@ jobs:
         with:
           test-name: "IM - snapshot contains current inventory"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#getSnapshotContainsCurrentInventory"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#getSnapshotContainsCurrentInventory"
           timeout: 10
           max-score: 1
 
@@ -173,7 +173,7 @@ jobs:
         with:
           test-name: "IM - concurrent addStock no lost updates"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#concurrentAddStockDoesNotLoseUpdates"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#concurrentAddStockDoesNotLoseUpdates"
           timeout: 10
           max-score: 4
 
@@ -183,7 +183,7 @@ jobs:
         with:
           test-name: "IM - concurrent removeStock never negative"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#concurrentRemoveNeverGoesNegative"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#concurrentRemoveNeverGoesNegative"
           timeout: 10
           max-score: 4
 
@@ -193,7 +193,7 @@ jobs:
         with:
           test-name: "IM - totalUnitsAdded accurate under concurrency"
           setup-command: ""
-          command: "mvn -B -ntp test -Dtest=InventoryManagerTest#totalUnitsAddedIsAccurateUnderConcurrency"
+          command: "mvn -B -ntp test -Dtest=InventoryManagerTest.java#totalUnitsAddedIsAccurateUnderConcurrency"
           timeout: 10
           max-score: 4
 
