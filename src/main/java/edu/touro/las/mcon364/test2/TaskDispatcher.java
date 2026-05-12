@@ -66,6 +66,7 @@ public class TaskDispatcher {
      */
     public List<Future<String>> dispatch(List<String> tasks) {
         // TODO 3
+        /*
         List<Future<String>> futures = tasks.stream().map((task)->{
             String result = task.toUpperCase();
             recordResult(result);
@@ -73,6 +74,8 @@ public class TaskDispatcher {
         });
 
         return futures; //placeholder
+    }*/
+        return null;
     }
 
     public void recordResult(String result) {
