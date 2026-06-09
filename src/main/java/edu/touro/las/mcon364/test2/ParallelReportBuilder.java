@@ -1,6 +1,7 @@
 package edu.touro.las.mcon364.test2;
 
 import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -85,7 +86,7 @@ public class ParallelReportBuilder {
         }
         // TODO 2B: create the concurrency structure needed for the pattern you chose
         ExecutorService pool = Executors.newFixedThreadPool(workers);
-        List<Future<Transaction>> futures = new ArrayList<>();
+        List<Future<BatchStats>> futures = new ArrayList<>();
         // TODO 2C: submit or assign one unit of work per batch
         // Each unit of work should:
         // - compute BatchStats for that batch
@@ -93,18 +94,33 @@ public class ParallelReportBuilder {
         // - you have to use streams here
 
 
-
-
+        futures = batches.stream().map(batch-> {
+            Future<BatchStats> future = pool.submit(() -> {
+                numberOfBatchesProcessed.incrementAndGet();
+                IntSummaryStatistics stats = batch.stream()
+                        .mapToInt(transaction -> transaction.amount()).summaryStatistics();
+                return new BatchStats(stats.getSum(), stats.getCount(), stats.getMax(), stats.getMin());
+            });
+            return future;
+        }).toList();
 
         long totalAmount = 0;
         long totalCount = 0;
         int globalMax = Integer.MIN_VALUE;
         int globalMin = Integer.MAX_VALUE;
-
+        //futures are needed when threads return a result. The taks submitted to executor service returns a future
+        //you do other work then call .get to retrieve the value
         // TODO 2D: after all work has been started, collect results
         // and combine them into the summary variables above
         // you don't have to use streams here. In this case for loop is acceptable
+        for (Future<BatchStats> future : futures){
+            BatchStats batchStats= future.get();
+            totalAmount+=batchStats.totalAmount();
+            totalCount+=batchStats.transactionCount();
+            globalMax = Math.max(globalMax, batchStats.maxTransactionAmount());
+            globalMin = Math.min(globalMin, batchStats.minTransactionAmount());
 
+        }
         // TODO 2E: shut down any concurrency resources you created
         pool.shutdown();
         //pool.awaitTermination();

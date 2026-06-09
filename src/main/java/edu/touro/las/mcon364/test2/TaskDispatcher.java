@@ -66,16 +66,16 @@ public class TaskDispatcher {
      */
     public List<Future<String>> dispatch(List<String> tasks) {
         // TODO 3
-        /*
-        List<Future<String>> futures = tasks.stream().map((task)->{
-            String result = task.toUpperCase();
-            recordResult(result);
-            return result;
-        });
 
+        List<Future<String>> futures = tasks.stream().map(task-> {
+            Future<String> future = pool.submit(() -> {
+                String result = task.toUpperCase();
+                recordResult(result);
+                return result;
+            });
+            return future;
+        }).toList();
         return futures; //placeholder
-    }*/
-        return null;
     }
 
     public void recordResult(String result) {
@@ -93,21 +93,15 @@ public class TaskDispatcher {
     public void shutdown() throws InterruptedException {
         //TODO 5
         pool.shutdown();
-        try {
-            pool.awaitTermination(10, TimeUnit.SECONDS);
-        } catch(InterruptedException i){
-            i.getMessage();
+        if (!pool.awaitTermination(10, TimeUnit.SECONDS)){
+            pool.shutdownNow();
         }
     }
 
     public List<String> getResults() {
         //TODO 6
-        try{
-            lock.lock();
             return List.copyOf(results);
-        } finally{
-            lock.unlock();
-        } //placeholder
+         //placeholder
     }
 
     public int getCompletedCount() {
@@ -119,5 +113,4 @@ public class TaskDispatcher {
             lock.unlock();
         } //placeholder
     }
-
 }

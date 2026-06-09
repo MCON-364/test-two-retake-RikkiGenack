@@ -100,14 +100,22 @@ public class InventoryManager {
         //       Hint: your chosen Map has a compute() method that lets you
         //             read and write in one atomic step.
         boolean[] removed = {false};
+        //compute method takes key- what you're looking up,
+        // and lambda function to determine value
+        // value is current value in map
+        // and what you return inside it becomes new map value
+        //merge takes key, default value to insert if key doesn't exist, and lambda to merge old and new value
       stock.compute(item, (key, value)->{
-          if(value >= qty){
-              value-=qty;
+          int currStock = (value==null) ? 0: value;
+          if(currStock >= qty){
               removed[0] = true;
+              return currStock-qty;
           } return value;
       });
 
    return removed[0];
+
+
 }
     /**
      * Returns the current stock for {@code item}, or 0 if unknown.
